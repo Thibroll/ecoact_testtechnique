@@ -1,28 +1,31 @@
-import pandas as pd
+import csv
 import locale
 from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker
-from models import Base, CandidateData, CandidateDataModel
+from models import Base, EmissionsData, EmissionsDataModel
 from pydantic import ValidationError
+from typing import List
 import config
-import mapping
 from helpers.data_cleaning import clean_row
 
 # ----------------------
 # Read and Validate Data
 # ----------------------
-def read_and_validate(file_path):
-    df = pd.read_excel(file_path)
-    df = df.rename(columns=mapping.column_name_mapping)
+def read_and_validate(file_path: str) -> List[EmissionsDataModel]:
+    data_dict = []
+    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                data_dict.append(dict(row))
+
     records = []
-    
-    for _, row in df.sample().iterrows():
+    for row in data_dict:
         try:
-            row = clean_row(row)
-            record = CandidateDataModel(**row.to_dict())
+            cleaned_row = clean_row(row)
+            record = EmissionsDataModel(**cleaned_row)
             records.append(record)
         except ValidationError as e:
-            print(f"Validation error: {e}")
+            print(f"Validation error for row {row}: {e}")
 
     return records
 
@@ -33,32 +36,11 @@ def read_and_validate(file_path):
 def init_db():
     engine = create_engine(config.DATABASE_URL)
     
-    # Drop all tables and recreate schema (if you prefer this approach)
+    # Drop all tables and recreate schema
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
     
     return engine
-
-
-# ----------------------
-# Empty the Table Before Inserting Data
-# ----------------------
-def empty_table(engine):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    
-    inspector = inspect(engine)
-    if 'candidate_data' in inspector.get_table_names():
-        print("Table 'candidate_data' found, removing it to insert again the data.")
-        try:
-            # Execute TRUNCATE only if the table exists
-            session.execute(text("TRUNCATE TABLE candidate_data RESTART IDENTITY CASCADE;"))
-            session.commit()
-            print("Table 'candidate_data' successfully truncated.")
-        except Exception as e:
-            print(f"Error emptying the table: {e}")
-        finally:
-            session.close()
 
 
 # ----------------------
@@ -69,7 +51,7 @@ def insert_data(engine, records):
     session = Session()
     
     for record in records:
-        db_record = CandidateData(**record.dict())
+        db_record = EmissionsData(**record.model_dump())
         session.add(db_record)
     
     session.commit()
@@ -84,18 +66,14 @@ if __name__ == "__main__":
     locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
     # Step 1: Validate data
-    print("Reading and validating data.")
+    print("Reading, validating and cleaning data.")
     validated_records = read_and_validate(config.SOURCE_FILE_PATH)
     
     # Step 2: Initialize the database (drop and recreate the schema)
     print("Initializing db.")
     engine = init_db()
 
-    # Step 3: Empty the existing table (before inserting new data)
-    print("Emptying existing table (if exists)")
-    empty_table(engine)
-    
-    # Step 4: Insert data into the database
+    # Step 3: Insert data into the database
     print("Inserting data into database.")
     insert_data(engine, validated_records)
     
