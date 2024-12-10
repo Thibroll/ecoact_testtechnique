@@ -17,7 +17,7 @@ class EmissionsData(Base):
     nom_base_francais = Column('Nom base français', String)
     nom_attribut_francais = Column('Nom attribut français', String)
     nom_frontiere_francais = Column('Nom frontière français', String)
-    code_categorie = Column('Code de la catégorie', String)
+    code_categorie = Column('Code de la catégorie', ARRAY(String))
     tags_francais = Column('Tags français', ARRAY(String))
     unite_francais = Column('Unité français', String)
     contributeur = Column('Contributeur', String)
@@ -59,6 +59,11 @@ class EmissionsData(Base):
     valeur_gaz_sup_5 = Column('Valeur gaz supplémentaire 5', Float)
     autres_ges = Column('Autres GES', Float)
     co2b = Column('CO2b', Float)
+    code1 = Column(String)
+    code2 = Column(String)
+    code3 = Column(String)
+    code4 = Column(String)
+    code5 = Column(String)
 
 
 # Pydantic model for DataItem validation
@@ -70,7 +75,7 @@ class EmissionsDataModel(BaseModel):
     nom_base_francais: Optional[str] = None
     nom_attribut_francais: Optional[str] = None
     nom_frontiere_francais: Optional[str] = None
-    code_categorie: Optional[str] = None
+    code_categorie: Optional[List[str]] = None
     tags_francais: Optional[List[str]] = None
     unite_francais: Optional[str] = None
     contributeur: Optional[str] = None
@@ -112,6 +117,11 @@ class EmissionsDataModel(BaseModel):
     valeur_gaz_sup_5: Optional[float] = None
     autres_ges: Optional[float] = None
     co2b: Optional[float] = None
+    code1: Optional[str] = None
+    code2: Optional[str] = None
+    code3: Optional[str] = None
+    code4: Optional[str] = None
+    code5: Optional[str] = None
 
     class Config:
         from_attributes = True
