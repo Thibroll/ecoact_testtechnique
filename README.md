@@ -28,6 +28,7 @@ Puis, pour un combustible donné, le mix des émissions par type de gaz à effet
 ###Propreté des données
 Pour présenter une visualisation fiable, je me suis bien assuré d'avoir des données bein propres et d'avoir des aggrégats qui fonctionnent bien. 
 Par exemple, je cherche des éléments uniques en discriminant par : la concaténation des champs 'nom base' et 'nom attribut', les trois premières valeurs du champ 'code de la catégorie', le champ 'unité français', et le 'type ligne' (qsui prenv valeur entre Poste et Elément).
+
 J'obtiens un élément unique, et une liste de postes pour ce même élément. Ainsi, je me suis bien assuré d'avoir des données uniques. 
 Par exemple, j'ai pu relever que l'indentifiant de l'élément est parfois le même pour un poste correspondant à l'élément, mais cette donnée est cassée et ce n'est pas toujours vrai. 
 
@@ -64,8 +65,12 @@ async def get_emissions():
 
 Pour importer les données ,j'ai préféré convertir le fichier xlsx en .csv, contenu dans le folder data.
 J'utilise SQLAlchemy comme ORM, et pydantic pour typer.
+
 Définir un fichier.env, avec DATABASE_URL défini pour l'url de la base de données, et SOURCE_FILE_PATH si la localisation du fichier de données a changé.
-Le code fonctionne en deux temps : mettre àjour le schema et l'unique table de la base de données avec ```python src/update_db.py```.
+Installer les packages avec ```pip install -r requirements.txt```
+
+Le code fonctionne en deux temps : mettre à jour le schema et l'unique table de la base de données avec ```python src/update_db.py```.
+
 Pour lancer le script dash, il faut lancer ```python src/app.py```
 
 ### Fichiers et dossiers : 
