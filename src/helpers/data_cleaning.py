@@ -3,7 +3,7 @@ from typing import List, Dict, Optional
 from helpers.mapping import column_name_mapping
 
 
-def convert_to_datetime(value: Optional[str], date_format: str = '%B %Y') -> Optional[datetime]:
+def convert_to_datetime(value: Optional[str], date_format: str = '%m %Y') -> Optional[datetime]:
     """
     Converts a string to a datetime object if the string matches the specified format.
     
@@ -19,10 +19,17 @@ def convert_to_datetime(value: Optional[str], date_format: str = '%B %Y') -> Opt
         Optional[datetime]: The converted `datetime` object if the string was valid; otherwise, `None`.
     """
     if isinstance(value, str):
+        french_months = {
+            "Janvier": "01", "Février": "02", "Mars": "03", 
+            "Avril": "04", "Mai": "05", "Juin": "06", 
+            "Juillet": "07", "Août": "08", "Septembre": "09", 
+            "Octobre": "10", "Novembre": "11", "Décembre": "12",
+            "Decembre": "12"
+        }
         try:
-            # Handle specific case for 'Decembre' replacement
-            if 'Decembre' in value:
-                value = value.replace('Decembre', 'Décembre')
+            for french_month, month_number in french_months.items():
+                if french_month in value:
+                    value = value.replace(french_month, month_number)
             return datetime.strptime(value, date_format)
         except ValueError as e:
             print(f"Error converting date string '{value}': {e}")

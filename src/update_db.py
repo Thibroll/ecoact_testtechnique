@@ -86,8 +86,6 @@ def insert_data(engine: Engine, records: List[EmissionsDataModel]) -> None:
 # Main Script
 # ----------------------
 if __name__ == "__main__":
-    # Set locale date as french for date parsing
-    locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
     # Step 1: Validate data
     print("Reading, validating and cleaning data.")
