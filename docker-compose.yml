@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: pgCont
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: ecoact_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "4500:8050"
+    environment:
+      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/ecoact_db"
+      SOURCE_FILE_PATH: "data/donnees_candidats_dev_python.csv"
+    command: >
+      sh -c "
+        python src/update_db.py &&
+        python src/app.py"
+    volumes:
+      - .:/app
+    links:
+      - postgres
+
+volumes:
+  postgres_data:
