@@ -16,6 +16,11 @@ def convert_to_datetime(value: Optional[str], date_format: str = '%B %Y') -> Opt
             return None
     return None
 
+def clean_categorie(categories: Optional[str]) -> List[str]:
+    if categories is None:
+        return []
+    return categories.split(" > ")
+
 def clean_tags(tags: Optional[str]) -> List[str]:
     """Clean the 'Tags français' column by splitting and stripping tags."""
     if isinstance(tags, str):
@@ -36,7 +41,12 @@ def clean_row(row: Dict[str, Optional[str]]) -> Dict[str, Optional[str]]:
 
     row['date_creation'] = convert_to_datetime(row.get('date_creation'))
     row['date_modification'] = convert_to_datetime(row.get('date_modification'))
-    row['tags_francais'] = clean_tags(row.get('tags_francais'))
+    row['code_categorie'] = clean_categorie(row.get('code_categorie'))
 
+        # Décomposition du code catégorie pour les stocker dans des colonnes
+    for i in range(5):
+        row[f'code{i+1}'] = row['code_categorie'][i] if len(row['code_categorie']) > i else None
+
+    row['tags_francais'] = clean_tags(row.get('tags_francais'))
 
     return row
