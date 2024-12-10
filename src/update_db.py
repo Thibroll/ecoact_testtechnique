@@ -1,6 +1,6 @@
 import csv
 import locale
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, EmissionsData, EmissionsDataModel
 from pydantic import ValidationError
@@ -12,6 +12,15 @@ from helpers.data_cleaning import clean_row
 # Read and Validate Data
 # ----------------------
 def read_and_validate(file_path: str) -> List[EmissionsDataModel]:
+    """
+    Reads and validates data from the CSV file.
+
+    Args:
+        file_path (str): The path to the CSV file to read.
+
+    Returns:
+        List[EmissionsDataModel]: A list of validated EmissionsDataModel instances.
+    """
     data_dict = []
     with open(file_path, mode='r', newline='', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)
@@ -33,7 +42,15 @@ def read_and_validate(file_path: str) -> List[EmissionsDataModel]:
 # ----------------------
 # Database Initialization
 # ----------------------
-def init_db():
+def init_db() -> Engine:
+    """
+    Initializes the database by creating the tables and schema.
+
+    Drops all existing tables and recreates the schema.
+
+    Returns:
+        Engine: The SQLAlchemy engine object used for database interaction.
+    """
     engine = create_engine(config.DATABASE_URL)
     
     # Drop all tables and recreate schema
@@ -46,7 +63,14 @@ def init_db():
 # ----------------------
 # Insert Data into Database
 # ----------------------
-def insert_data(engine, records):
+def insert_data(engine: Engine, records: List[EmissionsDataModel]) -> None:
+    """
+    Inserts a list of validated EmissionsDataModel records into the database.
+
+    Args:
+        engine (Engine): The SQLAlchemy engine object used to interact with the database.
+        records (List[EmissionsDataModel]): A list of validated data records to insert into the database.
+    """
     Session = sessionmaker(bind=engine)
     session = Session()
     
