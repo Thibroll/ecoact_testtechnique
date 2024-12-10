@@ -1,5 +1,4 @@
 import csv
-import locale
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker
 from models import Base, EmissionsData, EmissionsDataModel
