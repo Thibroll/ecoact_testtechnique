@@ -64,7 +64,8 @@ async def get_emissions():
 
 Pour importer les données ,j'ai préféré convertir le fichier xlsx en .csv, contenu dans le folder data.
 J'utilise SQLAlchemy comme ORM, et pydantic pour typer.
-Le code fonctionne en deux temps : je met à jour l'unique table de la base de données avec ```python src/update_db.py```. Il faut que les configs soient à jour. 
+Définir un fichier.env, avec DATABASE_URL défini pour l'url de la base de données, et SOURCE_FILE_PATH si la localisation du fichier de données a changé.
+Le code fonctionne en deux temps : mettre àjour le schema et l'unique table de la base de données avec ```python src/update_db.py```.
 Pour lancer le script dash, il faut lancer ```python src/app.py```
 
 ### Fichiers et dossiers : 
@@ -81,5 +82,5 @@ Pour lancer le script dash, il faut lancer ```python src/app.py```
 ## Pistes d'amélioration
 - Dans les graphes au détail du dashboard, il peut être amélioré en permettant la sélection de plusieurs combustibles et de comparer leurs taux d'émission au détail.
 - Intégrer des validations pydantics dans la déclaration du modèle pour avoir des validations de données efficaces. Je n'ai pas pris le temps de le faire.
-- - Evidemment, intégrer un API.
+- - Evidemment, intégrer l'API.
   
