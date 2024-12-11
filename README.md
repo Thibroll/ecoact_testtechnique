@@ -80,7 +80,7 @@ Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la 
     - **mapping.py** : mapping des noms de colonne vers un nom de variable des informations en base
 
 ## Pistes d'amélioration
-- Dans les graphes au détail du dashboard, il peut être amélioré en permettant la sélection de plusieurs combustibles et de comparer leurs taux d'émission au détail.
+- Dans les graphes au détail du dashboard, il peut être amélioré en permettant la sélection de plusieurs combustibles et de comparer leurs taux d'émission au détail. Je peux aussi exposer les tables brutes liées aux informations. Donner un détail des émissions par poste.
 - Intégrer des validations pydantics dans la déclaration du modèle pour avoir des validations de données efficaces. Je n'ai pas pris le temps de le faire.
 - Compléter l'API, intégrer des règles REST, la rendre plus exhaustive.
   
