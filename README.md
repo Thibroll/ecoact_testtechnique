@@ -18,7 +18,7 @@ Pour l'explorer et l'exploiter, je me suis reposé en premier sur le champ 'Code
 - Transport de personnes
 - UTCF
 
-Pour chacune de ces catégories, j'ai des sous catégories allant jsuq'à une profondeur de 5 sous catégories. 
+Pour chacune de ces catégories, on a sous catégories allant jsuq'à une profondeur de 5 sous catégories. 
 
 Je fais le choix de me limiter aux données Combustibles, en France métropolitaine, et actives (selon le champ 'Statut de l'élément'). Ainsi, je peux construire un dashboard avec les émissions équivalent CO2 par unité des combustibles français, selon plusieurs niveaux d'aggrégation (fossile ou organique, puis gaz, solide ou liquide, puis le détail des émissions par élémént, et je laisse le choix de l'unité). 
 Dans combustibles , il y a les informations à propos des pouvoirs calorifiques que j'ai choisi d'ignorer.
@@ -27,10 +27,10 @@ Puis, pour un combustible donné, le mix des émissions par type de gaz à effet
 
 ###Propreté des données
 Pour présenter une visualisation fiable, je me suis bien assuré d'avoir des données bein propres et d'avoir des aggrégats qui fonctionnent bien. 
-Par exemple, je cherche des éléments uniques en discriminant par : la concaténation des champs 'nom base' et 'nom attribut', les trois premières valeurs du champ 'code de la catégorie', le champ 'unité français', et le 'type ligne' (qsui prenv valeur entre Poste et Elément).
+Par exemple, je cherche des éléments uniques en discriminant par : la concaténation des champs 'nom base' et 'nom attribut', les trois premières valeurs du champ 'code de la catégorie', le champ 'unité français', et le 'type ligne' (qui prend valeur entre Poste et Elément).
 
 J'obtiens un élément unique, et une liste de postes pour ce même élément. Ainsi, je me suis bien assuré d'avoir des données uniques. 
-Par exemple, j'ai pu relever que l'indentifiant de l'élément est parfois le même pour un poste correspondant à l'élément, mais cette donnée est cassée et ce n'est pas toujours vrai. 
+Par exemple, j'ai pu relever que l'indentifiant de l'élément est parfois le même pour un poste correspondant à l'élément, mais ce n'est pas toujours vrai. 
 
 ## Questions aux PO
 Il faut noter que travailler sur les combustibles est un choix arbitraire que j'ai fait dans ce test technique. Le but ici est de montrer un POC de dashboard pour le cadre de l'entetien. Ce qui me mène à des questions que je peux poser au PO :
