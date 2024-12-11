@@ -68,10 +68,12 @@ Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la 
 ### Fichiers et dossiers : 
 - **data**: dossier contenant les données à importer
 - **src**: contenu du code
-- **app.py**: application dash à lancer une fois que la base est à jour
+- **dashboard.py**: le dashboard en Dash.
+- **app.py**: application dash à lancer une fois que la base est à jour.
 - **config.py**: configurations du code
 - **models.py**: modèle sqlAlchemy de la table à insérer en base
 - **update_db.py** : script pour mettre à jour la base. Celui ci efface le schema et le recréée à chaque lancement.
+- **db.py** : la connection à la db
   - **helpers** : module pour processer les données
     - **data.cleaning.py**: cleane ;lles données pour les insérer en base
     - **mapping.py** : mapping des noms de colonne vers un nom de variable des informations en base
