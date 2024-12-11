@@ -70,6 +70,22 @@ def clean_tags(tags: Optional[str]) -> List[str]:
             print(f"Error cleaning tags: {tags} ; Error: {e}")
     return []
 
+def clean_unity(unity: str) -> str:
+    """
+    Cleans and maps a given unity string to its standardized form based on a predefined mapping.
+
+    Parameters:
+        unity (str): The input unity string to be cleaned.
+
+    Returns:
+        str: The standardized unity string if a mapping exists, or the original unity string otherwise.
+    """
+    unity_mapping = {
+        'kgCO2e/tep PCI': 'kgCO2e/TEP PCI',
+        'kgCO2e/m3 (n)': 'kgCO2e/m3',
+        'kgCO2e/kWh (PCI)': 'kgCO2e/kWh PCI'}
+    return unity_mapping.get(unity, unity)
+
 def clean_row(row: Dict[str, Optional[str]]) -> Dict[str, Optional[str]]:
     """
     Cleans a data row by processing and mapping the fields to their correct format.
@@ -95,6 +111,7 @@ def clean_row(row: Dict[str, Optional[str]]) -> Dict[str, Optional[str]]:
     row['date_creation'] = convert_to_datetime(row.get('date_creation'))
     row['date_modification'] = convert_to_datetime(row.get('date_modification'))
     row['code_categorie'] = clean_categorie(row.get('code_categorie'))
+    row['unite_francais'] = clean_unity(row.get('unite_francais'))
 
         # Décomposition du code catégorie pour les stocker dans des colonnes
     for i in range(5):

@@ -48,7 +48,7 @@ df_elt = pd.read_sql("""
     FROM public.donnees_emissions
     WHERE "Statut de l'élément" IN ('Valide générique', 'Valide spécifique')
     AND "code1" = 'Combustibles'
-    AND "Sous-localisation géographique français" = 'France continentale'
+    AND "Localisation géographique" = 'France continentale'
     AND "Type Ligne" = 'Elément'
 """, con=engine)
 
@@ -57,7 +57,7 @@ df_poste = pd.read_sql("""
     FROM public.donnees_emissions
     WHERE "Statut de l'élément" IN ('Valide générique', 'Valide spécifique')
     AND "code1" = 'Combustibles'
-    AND "Sous-localisation géographique français" = 'France continentale'
+    AND "Localisation géographique" = 'France continentale'
     AND "Type Ligne" = 'Poste'
 """, con=engine)
 
