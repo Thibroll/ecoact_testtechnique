@@ -42,30 +42,16 @@ Il faut noter que travailler sur les combustibles est un choix arbitraire que j'
 - Je n'ai exploité que les données actives, il y a t il un usage pour les données d'archive ?
 - Je peux aussi penser à des questions plus larges, quelles seraient les questions auxquelles on souhaite répondre avec ces dashboards ? Idéalement, je ferai un peu de recherche utilisateur avec des experts pour essayer d'identifer des points bloquants auxquels je peux répondre pour leur faire gagner du temps.
 
+## Routing
 
-## API
-Pour intégrer l'API, je peux utiliser FastAPI pour intégrer des calls API dans mon interface Dash au sein de la même application. J'utiliserai alors Uvicorn comme serveur ASGI afin d'éxecuter en parallèle l'application Dash et l'API FastAPI.  Je peux définir des routes comme /emissions/ pour faire ce genre de call : 
-
-```
-@api.get("/api/emissions")
-async def get_emissions():
-    engine = create_engine(config.DATABASE_URL)
-    df = pd.read_sql("""
-        SELECT * FROM public.donnees_emissions
-        WHERE "Statut de l'élément" IN ('Valide générique', 'Valide spécifique')
-        AND "code1" = 'Combustibles'
-        AND "Sous-localisation géographique français" = 'France continentale'
-        AND "Type Ligne" = 'Elément'
-    """, con=engine)
-    return df.to_dict(orient='records')`
-```
-
+L'application se décompose en deux liens : 
+- /dashboard pour accéder au dashboard
+- /api/combustibles pour le call api pour récupérer les données combustibles
 
 ## Code
-
-
 Pour importer les données ,j'ai préféré convertir le fichier xlsx en .csv, contenu dans le folder data.
 J'utilise SQLAlchemy comme ORM, et pydantic pour typer.
+J'ai intégré l'API avec FastAPI. J'ai mis un seul call pour toutes les données valides combustibles en France métropolitaine. 
 
 ### Lancer localement
 Définir un fichier.env, avec DATABASE_URL défini pour l'url de la base de données, et SOURCE_FILE_PATH si la localisation du fichier de données a changé.
@@ -76,7 +62,8 @@ Le code fonctionne en deux temps : mettre à jour le schema et l'unique table de
 
 ### Lancer avec docker
 
-Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la commande ```docker-compse up``` depuis la racine du projet, puis aller sur l'url ```http://localhost:4500/``` une fois que le container est lancé
+Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la commande ```docker-compse up``` depuis la racine du projet, puis aller sur l'url ```http://localhost:4500/``` une fois que le container est lancé ( ```http://localhost:4500/dashboard/``` pour accéder au dashboard ).
+
 
 ### Fichiers et dossiers : 
 - **data**: dossier contenant les données à importer
@@ -92,5 +79,5 @@ Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la 
 ## Pistes d'amélioration
 - Dans les graphes au détail du dashboard, il peut être amélioré en permettant la sélection de plusieurs combustibles et de comparer leurs taux d'émission au détail.
 - Intégrer des validations pydantics dans la déclaration du modèle pour avoir des validations de données efficaces. Je n'ai pas pris le temps de le faire.
-- - Evidemment, intégrer l'API.
+- Compléter l'API, intégrer des règles REST, la rendre plus exhaustive.
   
