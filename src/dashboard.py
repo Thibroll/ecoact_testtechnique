@@ -71,7 +71,7 @@ df_poste['Nom complet'] = df_poste['Nom base français'].fillna('') + ' ' + df_p
 app.layout = html.Div(
     style={'padding': '20px', 'fontFamily': 'Arial, sans-serif'},
     children=[
-        html.H3('Décomposition des émissions par combustible en France métropolitaine', style={'textAlign': 'center', 'marginBottom': '20px'}),
+        html.H3('Décomposition des taux d\'émission par combustible en France métropolitaine', style={'textAlign': 'center', 'marginBottom': '20px'}),
         
         # Type de combustible
         html.Div(
