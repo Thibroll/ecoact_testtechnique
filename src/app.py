@@ -27,7 +27,6 @@ def index():
                 AND "Localisation géographique" = 'France continentale'
             """, con=engine)
         df = df.fillna('')
-        print(df)
         return {"data": df.to_dict(orient="records")}
     except Exception as e:
         return {"error": str(e)}
