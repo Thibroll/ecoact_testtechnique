@@ -52,7 +52,7 @@ L'application se décompose en deux liens :
 ## Code
 Pour importer les données ,j'ai préféré convertir le fichier xlsx en .csv, contenu dans le folder data.
 J'utilise SQLAlchemy comme ORM, et pydantic pour typer.
-J'ai intégré l'API avec FastAPI. J'ai mis un seul call pour toutes les données valides combustibles en France métropolitaine. 
+J'ai intégré l'API avec FastAPI. J'ai mis un seul call pour toutes les données combustibles valides en France métropolitaine. 
 
 ### Lancer localement
 Définir un fichier.env, avec DATABASE_URL défini pour l'url de la base de données, et SOURCE_FILE_PATH si la localisation du fichier de données a changé.
