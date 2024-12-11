@@ -63,15 +63,20 @@ async def get_emissions():
 
 ## Code
 
+
 Pour importer les données ,j'ai préféré convertir le fichier xlsx en .csv, contenu dans le folder data.
 J'utilise SQLAlchemy comme ORM, et pydantic pour typer.
 
+### Lancer localement
 Définir un fichier.env, avec DATABASE_URL défini pour l'url de la base de données, et SOURCE_FILE_PATH si la localisation du fichier de données a changé.
 Installer les packages avec ```pip install -r requirements.txt```
 
 Le code fonctionne en deux temps : mettre à jour le schema et l'unique table de la base de données avec ```python src/update_db.py```.
 
-Pour lancer le script dash, il faut lancer ```python src/app.py```
+
+### Lancer avec docker
+
+Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la commande ```docker-compse up``` depuis la racine du projet, puis aller sur l'url ```http://localhost:4500/``` une fois que le container est lancé
 
 ### Fichiers et dossiers : 
 - **data**: dossier contenant les données à importer
