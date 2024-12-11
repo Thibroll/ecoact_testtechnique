@@ -290,7 +290,6 @@ def update_histogram_detail_emissions(selected_type: str, selected_state: str, s
         (df_elt['Unité français'] == selected_unity) &
         (df_elt['Nom complet'] == selected_combustible)
     ]
-    print(filtered_df)
     row = filtered_df.iloc[0]
     columns_to_plot = ['Total poste non décomposé', 'CO2f', 'CH4f', 'CH4b', 'N2O','Autres GES', 'CO2b']
     selected_row = row[columns_to_plot]
