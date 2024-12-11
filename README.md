@@ -64,7 +64,7 @@ Le code fonctionne en deux temps : mettre à jour le schema et l'unique table de
 
 ### Lancer avec docker
 
-Avec docker : Le projet est dockerisé, pour lancer le script on peut lancer la commande ```docker-compse up``` depuis la racine du projet, puis aller sur l'url ```http://localhost:4500/``` une fois que le container est lancé ( ```http://localhost:4500/dashboard/``` pour accéder au dashboard ).
+Avec docker : Le projet est dockerisé. En ayant docker installé localement, pour lancer le script on peut lancer la commande ```docker-compose up --build``` depuis la racine du projet, puis aller sur l'url ```http://localhost:4500/``` une fois que le container est lancé ( ```http://localhost:4500/dashboard/``` pour accéder au dashboard ).
 
 
 ### Fichiers et dossiers : 
