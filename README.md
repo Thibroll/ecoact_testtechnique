@@ -42,7 +42,7 @@ Il faut noter que travailler sur les combustibles est un choix arbitraire que j'
 - Je n'ai exploité que les données actives, il y a t il un usage pour les données d'archive ?
 - Je peux aussi penser à des questions plus larges, quelles seraient les questions auxquelles on souhaite répondre avec ces dashboards ? Idéalement, je ferai un peu de recherche utilisateur avec des experts pour essayer d'identifer des points bloquants auxquels je peux répondre pour leur faire gagner du temps.
 - J'ai fait un choix de design de laisser le choix de l'unité dans le dashboard : ca pose un problème de design dans la mesure où oues unités peuvent couvrir des substances différentes. J'ai fait ce choix car je n'ai pas réussi à imaginer un moyen efficace de comparer tous les combustibles d'une même catégorie quelque soit leur unité. Ca peut être une piste de réflexion avec un PO, à savoir comment bien comparer les émissions entre deux combustibles (ou dans une mesure plus large deux éléments référencés dans la base) si ceux ci n'ont pas d'unité en commun.
-- Pour des sujets d'analyse du cycle de vie, comment je peux intégrer l'API ou le dashboard pour le rendre interactif et permettre de sortir une donnée pertinente liée à un besoin expert ?
+- Pour des sujets d'analyse du cycle de vie, comment puis-je peux intégrer l'API ou le dashboard pour le rendre interactif et permettre de sortir une donnée pertinente liée à un besoin expert ?
 
 ## Routing
 
