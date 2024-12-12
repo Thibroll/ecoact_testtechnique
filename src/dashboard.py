@@ -276,10 +276,10 @@ def update_histogram_detail_emissions(selected_type: str, selected_state: str, s
     Generate a histogram for detailed emissions based on selected combustible, type, state, and unit.
     
     Args:
-        selected_combustible (str): The selected combustible.
         selected_type (str): The selected type ('Fossiles' or 'Organiques').
         selected_state (str): The selected state.
         selected_unity (str): The selected unit.
+        selected_combustible (str): The selected combustible.
     
     Returns:
         Figure: A Plotly figure object for the detailed emissions histogram.
@@ -327,10 +327,10 @@ def update_histogram_poste(selected_type: str, selected_state: str, selected_uni
     Generate a histogram for poste emissions based on selected combustible, type, state, and unit.
     
     Args:
-        selected_combustible (str): The selected combustible.
         selected_type (str): The selected type ('Fossiles' or 'Organiques').
         selected_state (str): The selected state.
         selected_unity (str): The selected unit.
+        selected_combustible (str): The selected combustible.
     
     Returns:
         Figure: A Plotly figure object for the poste emissions histogram.
