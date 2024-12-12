@@ -25,7 +25,7 @@ Dans combustibles , il y a les informations à propos des pouvoirs calorifiques 
 Il y a donc trois courbes dans mon dashboard : le taux d'émisision par unité par type (fossile ou organique), par état (liquide, soliden gaz) et selon une unité.
 Puis, pour un combustible donné, le mix des émissions par type de gaz à effet de serre, puis le taux par poste d'émission.
 
-###Propreté des données
+### Propreté des données
 Pour présenter une visualisation fiable, je me suis bien assuré d'avoir des données bein propres et d'avoir des aggrégats qui fonctionnent bien. 
 Par exemple, je cherche des éléments uniques en discriminant par : la concaténation des champs 'nom base' et 'nom attribut', les trois premières valeurs du champ 'code de la catégorie', le champ 'unité français', et le 'type ligne' (qui prend valeur entre Poste et Elément).
 
