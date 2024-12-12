@@ -34,7 +34,7 @@ Par exemple, j'ai pu relever que l'indentifiant de l'élément est parfois le m�
 
 ## Questions aux PO
 Il faut noter que travailler sur les combustibles est un choix arbitraire que j'ai fait dans ce test technique. Le but ici est de montrer un POC de dashboard pour le cadre de l'entetien. Ce qui me mène à des questions que je peux poser au PO :
-- Quel est le besoin pour ce dashboard ? En particulier, quelles sont les données que je cherche à comparer ? J'ai des détails d'émission en France Métropolitaine, en Europe et Outre-Mer, voulons nous comparer les zones géographiques ? Souhaitons nous exploiter d'autres inforations comme les types de réglementation, la transparence ? 
+- Quel est le besoin pour ce dashboard ? En particulier, quelles sont les données que je cherche à comparer ? J'ai des détails d'émission en France Métropolitaine, en Europe et Outre-Mer, voulons nous comparer les zones géographiques ? Souhaitons nous exploiter d'autres informations comme les types de réglementation, la transparence ? 
 - Quelles sont les informations pertinents à croiser pour un dashboard efficace ? Ici je n'ai mis que les informations sur les Combustibles.
 - Quels sont les défis en terme de performance attendus pour l'API, et les applis web en dash ? 
 - Il y a t il une métrique pour évaluer l'efficacité des outils de visualisation ? Pouvons nous mesurer l'impact des outils au traffic par courbe ou dashboard ?
@@ -77,7 +77,7 @@ Avec docker : Le projet est dockerisé. En ayant docker installé localement, po
 - **update_db.py** : script pour mettre à jour la base. Celui ci efface le schema et le recréée à chaque lancement.
 - **db.py** : la connection à la db
   - **helpers** : module pour processer les données
-    - **data.cleaning.py**: cleane ;lles données pour les insérer en base
+    - **data.cleaning.py**: cleane les données pour les insérer en base
     - **mapping.py** : mapping des noms de colonne vers un nom de variable des informations en base
 
 ## Pistes d'amélioration
